@@ -1,5 +1,5 @@
 <p align="center">
-<img src="https://raw.githubusercontent.com/JSuryatenggara/CaRAS/storage/images/CaRAS_logo.png" width="1000">
+<img src="https://raw.githubusercontent.com/mbassalbioinformatics/CaRAS/storage/images/CaRAS_logo.png" width="1000">
 </p>
 <p align="center">
 	<b>C</b>UT-<b>a</b>nd-<b>R</b>UN <b>A</b>nalysis <b>S</b>uite
@@ -14,7 +14,7 @@
 <br>
 
 ## Introduction
-CaRAS (CUT-and-RUN Analysis Suite) (https://github.com/JSuryatenggara/CaRAS) was conceived as an all-in-one analysis pipeline specifically tailored and optimized for CUT&RUN/Tag. CaRAS is a unified interface and wrapper tailored for the new generation of ChIP-Seq: CUT&RUN and CUT&Tag analysis (for the sake of conciseness, both techniques will be referred to as simply CnR). CaRAS builds on the same programming framework as ChIP-AP (https://github.com/JSuryatenggara/ChIP-AP), sharing a number of similar methodologies and working characteristics but diverges in that it tailors specific analysis steps specifically for CnR analyses that are yet unpublished for CnR aimed workflows.
+CaRAS (CUT-and-RUN Analysis Suite) (https://github.com/mbassalbioinformatics/CaRAS) was conceived as an all-in-one analysis pipeline specifically tailored and optimized for CUT&RUN/Tag. CaRAS is a unified interface and wrapper tailored for the new generation of ChIP-Seq: CUT&RUN and CUT&Tag analysis (for the sake of conciseness, both techniques will be referred to as simply CnR). CaRAS builds on the same programming framework as ChIP-AP (https://github.com/mbassalbioinformatics/ChIP-AP), sharing a number of similar methodologies and working characteristics but diverges in that it tailors specific analysis steps specifically for CnR analyses that are yet unpublished for CnR aimed workflows.
 
 
 CaRAS is the first analysis pipeline and framework which <b>generates normalized bam (nBAM) files</b>, which are aligned bam files that are normalized to the spiked-in or leftover DNA, which is critical in CnR analysis. Facilitated by the normalization of aligned reads, ChIP-Seq peak callers were able to be optimized to work properly for CnR peak detection. This leads to the next key feature which is the utilization of <b>five modified ChIP-Seq peak callers in combination with a CUT&RUN dedicated peak caller (SEACR)</b>, giving a total of 6 peak callers to establish consensus with. CaRAS is also equipped with <b>single cell analysis capabilities (beta)</b>, where single cell samples are clustered based on their enriched gene ontology terms (GO) or pathways, and downstream analyses will be performed on each cluster to enable capturing the states / phases / differentiation of the cells.
@@ -58,7 +58,7 @@ For advanced users, the installation instructions are as follows:
 
 1 - Download the caras_installation zip in our github repo and unzip in the folder of your choosing.
 
-    wget https://github.com/JSuryatenggara/CaRAS/raw/main/caras_installation.zip
+    wget https://github.com/mbassalbioinformatics/CaRAS/raw/main/caras_installation.zip
 
 2 - Download the pre-generated, required genome files from our dropbox and unzip in the same folder as the CaRAS scripts – i.e.
 
@@ -156,9 +156,9 @@ When this option is used, this table will disregard any assigned values to --chi
 <br>
 
 ## CaRAS Graphical Overview
-<img src="https://raw.githubusercontent.com/JSuryatenggara/CaRAS/storage/images/caras_workflow_guide.png" width="1000">
+<img src="https://raw.githubusercontent.com/mbassalbioinformatics/CaRAS/storage/images/caras_workflow_guide.png" width="1000">
 
-For detailed explanations of all the steps and methodologies used throughout CaRAS refer to our documentation (https://github.com/JSuryatenggara/CaRAS/wiki/CaRAS-Guide)
+For detailed explanations of all the steps and methodologies used throughout CaRAS refer to our documentation (https://github.com/mbassalbioinformatics/CaRAS/wiki/CaRAS-Guide)
 
 <br>
 
@@ -454,7 +454,7 @@ Below is an example of settings table file in its default-setting state:
 ## Aligned reads (BAM) normalization formula
 For normalization purpose, it has been shown that simply adding the same low amount of spiked-in DNA fragments from a different species to each sample would suffice as a valid basis of normalization and allows accurate quantification of protein occupancy (Skene & Henikoff, 2017). In a later publication on an improved CUT&RUN method, it was shown that the bacterial DNA fragments originating from the purification of pA-MNase complex that was carried over throughout the procedures would suffice to serve the same purpose (Meers, Bryson, Henikoff, & Henikoff, 2019). To calculate the normalization factor for each sample, the reads from the sequencing run need to be realigned onto the spiked-in or the carry-over DNA’s respective genomes and have the number of successfully aligned reads counted. Once the number of aligned reads is determined, it is therefore possible to perform normalization based on the number of these aligned non-sample reads as they ought to be equal across all samples and replicates. CARAS performs this alignment with subsequent normalization with formula as described below:
 
-<img src="https://raw.githubusercontent.com/JSuryatenggara/CaRAS/storage/images/norm_equation_guide.png" width="500">
+<img src="https://raw.githubusercontent.com/mbassalbioinformatics/CaRAS/storage/images/norm_equation_guide.png" width="500">
 
 Given multiple samples involved in a single batch of analysis, the batch multiplier is determined by the largest and the second largest number of mapped spiked-in or carry-over DNA (reference) reads. The normalization factor for each sample is then calculated by dividing the batch multiplier with the corresponding sample’s number of reads. Reads normalization will then be carried out by simply multiplying the original number of reads in each sample with its corresponding normalization factor.
 
@@ -494,7 +494,7 @@ The irreproducible discovery rate (IDR) calculations for all peaks are integrate
 
 The reproducibility of all peaks in the output full peak list are calculated based on their detectability by different individual peak callers and ranked accordingly. These six -log IDR values are copied into the output full peak list, providing six -log IDR values for every peak, which are then summed and converted into a final IDR value.
 
-<img src="https://raw.githubusercontent.com/JSuryatenggara/CaRAS/storage/images/idr_equation_guide.png" width="500">
+<img src="https://raw.githubusercontent.com/mbassalbioinformatics/CaRAS/storage/images/idr_equation_guide.png" width="500">
 
 As reproducibility is not significantly relevant for single-cell analysis with its duplicitous number of cell samples, on top of the time-consuming process were this step is to be applied to every single sample, the IDR calculation step is only applicable to bulk analysis.
 
@@ -510,7 +510,7 @@ By default, as recommended in default_settings_table.tsv, CaRAS will use HOMER t
 <br>
 
 ## Interpreting CaRAS Output
-[Some parts adapted from ChIP-AP manual (https://github.com/JSuryatenggara/ChIP-AP)]. CaRAS does report a fair amount of stuff. If you ran it locally you have a swath of folders and you have no clue what to look for and it’s all confusing. We get that. The reality though it’s very simple to know what to look for to know your experimental run worked and we are going to walk you through that!
+[Some parts adapted from ChIP-AP manual (https://github.com/mbassalbioinformatics/ChIP-AP)]. CaRAS does report a fair amount of stuff. If you ran it locally you have a swath of folders and you have no clue what to look for and it’s all confusing. We get that. The reality though it’s very simple to know what to look for to know your experimental run worked and we are going to walk you through that!
 
 ### Did my analysis work?
 There are a couple of things to look for to answer this question. 1, the fingerprint plot and 2, the venn diagram of the merged peaks. Let's begin…
@@ -519,7 +519,7 @@ There are a couple of things to look for to answer this question. 1, the fingerp
 
     The fingerprint plot tells us how well the enrichment of your samples worked. It is generated by the function from the deeptools package and is generated after the alignment files. As such, the plots are found in the “08_results” folder and are labelled “fingerprint_xxxxx.png/svg.” The PNG files allow you to view them in any image viewer, the SVG files are for opening in Adobe Illustrator or Inkscape to make HQ publication figures later if you need.
 
-    <img src="https://raw.githubusercontent.com/JSuryatenggara/CaRAS/storage/images/fingerprint_plot_guide.png" width="500"> 
+    <img src="https://raw.githubusercontent.com/mbassalbioinformatics/CaRAS/storage/images/fingerprint_plot_guide.png" width="500"> 
 
     To interpret the fingerprint plot, (more information can be found on the deeptools documentation site), but put simply, the input control should be a diagonal line as close as possible toward the 1:1 diagonal. Your ChIP sample should have a bend/kink towards the bottom right corner. The greater the separation between the input and the chip sample, the greater the enrichment you will see in the final result (i.e., lots of peaks). If the lines are overlapping, then you will see little enrichment and your experiment didn’t work that well. If you’re sample lines are switched – then you probably switched the sample names and we recommend doing the right thing and repeating the experiment and not simply switch sample names for the sake of a publication.
 
@@ -529,7 +529,7 @@ There are a couple of things to look for to answer this question. 1, the fingerp
 
     In the folder “21_peaks_merging” folder, you will find the “venn.txt” file. This will show you a textual venn diagram of the overlap between the called peaks across all peak callers. To know your experiment worked well, you should see a full list with combinations of all peak callers and relatively large numbers for the consensus peak sets (ie peaks called by multiple peak callers) – this is the ideal case. However, from our experience, there will almost always be 1, maybe 2 peak callers that don’t like a dataset for some reason and so you may find a peak caller performed poorly but the others performed admirably. This is still a good and valid result. 
     
-    <img src="https://raw.githubusercontent.com/JSuryatenggara/CaRAS/storage/images/venn_diagram_guide.png" width="500">
+    <img src="https://raw.githubusercontent.com/mbassalbioinformatics/CaRAS/storage/images/venn_diagram_guide.png" width="500">
 
     If you look at this file and only see small number of peaks and little overlap, and only 1 peak caller seems to have dominated peak calling, then likely your experiment didn’t work that great. Just because only 1 peak caller performed well though, doesn’t mean the experiment is a write-off and a failure. It can still be valid and so doing some manual validations on the top fold-change differential peaks by chip-PCR might give you an indication whether there is salvageable data or not. Also if you have other confirmatory experimental evidence then even 1 peak caller getting results is fine. This is why we implemented multiple peak callers, because there are many instances where the signal:noise just creates a mess for most peak callers but generally 1 will be the super-hero of the day in such a situation.
 
@@ -539,11 +539,11 @@ There are a couple of things to look for to answer this question. 1, the fingerp
 
     Open a new blank workbook in excel
 
-    <img src="https://raw.githubusercontent.com/JSuryatenggara/CaRAS/storage/images/excel_screenshot_1_guide.png" width="500">
+    <img src="https://raw.githubusercontent.com/mbassalbioinformatics/CaRAS/storage/images/excel_screenshot_1_guide.png" width="500">
     
     In the ribbon at the top, go to “Data”, then select “From Text/CSV”
 
-    <img src="https://raw.githubusercontent.com/JSuryatenggara/CaRAS/storage/images/excel_screenshot_2_guide.png" width="500">
+    <img src="https://raw.githubusercontent.com/mbassalbioinformatics/CaRAS/storage/images/excel_screenshot_2_guide.png" width="500">
 
     In the dialog box that opens up, find and open the peaks files “xxxx_all_peaks_calculated.tsv.” Follow all the prompts and keep pressing “Next” / “Proceed” till the end and the file opens. Opening the peak file this way circumvents an issue that Excel constantly makes which is it will interpret some gene names such as OCT1 as a date, when its not. From this file, you can view all the results and data for your analysis. Refer to Interpreting CaRAS Output for the definition of what each column means.
 
@@ -566,7 +566,7 @@ There are a couple of things to look for to answer this question. 1, the fingerp
 
     As mentioned before (see section peak feature extraction above), in single-cell analysis, the differences (distance values) between all sample’s extracted features profile are to be projected into a 2D plane and clustered based on the projected their 2D positions to one another. After clustering, the peak lists of all samples which are clustered into a same group will be concatenated into one, namely [setname]_[peakset]_[GO/pathway database]_[group#]_ all_peaks _clustered.tsv. To ascertain that the samples are satisfactorily segregated as expected, user can view the MDS-projected 2D scatter plot, namely [setname]_[peakset]_[GO/pathway database]_Term_Ranking _RBO_Distance_MDS_Spectral_Clustering.png.
 
-    <img src="https://raw.githubusercontent.com/JSuryatenggara/CaRAS/storage/images/spectral_clustering_guide.png" width="500">
+    <img src="https://raw.githubusercontent.com/mbassalbioinformatics/CaRAS/storage/images/spectral_clustering_guide.png" width="500">
 
     Above is an example of MDS-projected 2D plot, showing a good segregation by spectral clustering of 2 different populations with 20 samples each. Besides the fact that spectral clustering works nicely on these samples 2D distribution, this also means that the algorithm of determining the optimal number by maximum eigengap value is accurate (because in this example, the optimal number of clusters was automatically estimated by CaRAS). In cases where the estimation is off (e.g., 3 clusters), users can explicitly state the optimal number of clusters, which is 2 in this case, via --clustnum flag in peak_feature_extractor.py and rerun the script. Beforehand, if the user already knows how many clusters to expect even without looking at the plot above first, users can explicitly state the expected number of clusters via --clustnum in the CaRAS command line.
 
